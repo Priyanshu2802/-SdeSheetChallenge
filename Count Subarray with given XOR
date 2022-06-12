@@ -1,0 +1,14 @@
+int subarraysXor(vector<int> &arr, int x)
+{
+    map<int,int>mp;
+    int curr=0;
+    int count=0;
+    for(int i=0;i<arr.size();i++)
+    {
+        curr^=arr[i];
+        if(curr==x)count++;
+        if(mp[curr^x]!=0)count+=mp[curr^x];//checking weather A occurs previously or not by this rule
+        mp[curr]++;// A^x=C then A=x^C
+    }
+    return count;
+}
