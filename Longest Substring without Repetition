@@ -1,0 +1,16 @@
+int lengthOfLongestSubstring(string s) {
+        int right=0,left=0,len=0;
+        map<int,int>freq;
+        int n=s.size();
+        while(right<n)
+        {
+            freq[s[right]]++;
+            while(freq[s[right]]>1)
+            {
+                freq[s[left++]]--;
+            }
+            len=max(len,right-left+1);
+            right++;
+        }
+        return len;
+    }
