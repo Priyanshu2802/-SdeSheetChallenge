@@ -1,0 +1,8 @@
+ListNode* reverseList(ListNode* head) {
+        if(!head || !head->next)return head;
+        ListNode* nextHead=head->next;
+        ListNode* newHead=reverseList(head->next);
+        nextHead->next=head;
+        head->next=NULL;
+        return newHead;
+    }
