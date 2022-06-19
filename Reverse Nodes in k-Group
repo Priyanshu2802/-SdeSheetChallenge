@@ -1,0 +1,39 @@
+ //brute force approach
+ ListNode* reverseKGroup(ListNode* head, int k) {
+        if(!head || k==1)return head;
+        ListNode* res=new ListNode(0);
+        ListNode* temp=res,*curr=head;
+        stack<int>st;
+        while(curr)
+        {
+            for(int i=0;i<k and curr!=NULL;i++)
+            {
+                st.push(curr->val);
+                curr=curr->next;
+            }
+            if(st.size()==k)
+            {
+            while(!st.empty())
+            {
+                temp->next=new ListNode(st.top());
+                st.pop();
+                temp=temp->next;
+            }
+            }
+            else
+            {
+                stack<int>st2;
+                while(!st.empty()){
+                    st2.push(st.top());
+                    st.pop();
+                }
+                while(!st2.empty())
+                {
+                temp->next=new ListNode(st2.top());
+                st2.pop();
+                temp=temp->next;
+                }
+            }
+        }
+        return res->next;
+    }
