@@ -1,0 +1,30 @@
+Node* mergeSortedList(Node* l1,Node* l2)//for merging two sorted linked list without extra space
+{
+    if(!l1)return l2;
+    if(!l2)return l1;
+    if(l1->data>l2->data)swap(l1,l2);
+    Node* ans=l1;
+    while(l1 and l2)
+    {
+        Node* temp=NULL;
+        while(l1 and l1->data<=l2->data)
+        {
+            temp=l1;
+            l1=l1->bottom;
+        }
+        temp->bottom=l2;
+        swap(l2,l1);
+    }
+    return ans;
+}
+Node *flatten(Node *root)
+{
+   Node* res=root;
+   Node* ans=NULL,*prev=NULL;
+   while(res)
+   {
+       prev=mergeSortedList(prev,res);
+       res=res->next;
+   }
+   return prev;
+}
