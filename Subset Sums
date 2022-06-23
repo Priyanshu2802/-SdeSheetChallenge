@@ -1,0 +1,22 @@
+ void helper(vector<int>&arr,int ind,int n,int& curr,vector<int>&ans)
+    {
+        ans.push_back(curr);
+        if(ind==n) return;
+        for(int i=ind;i<n;i++)
+        {
+            curr+=arr[i];
+            //cout<<"curr is : "<<curr<<endl;
+            helper(arr,i+1,n,curr,ans);
+            curr-=arr[i];
+        }
+        return;
+        
+    }
+public:
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int>ans;
+        int curr=0;
+        helper(arr,0,N,curr,ans);
+        return ans;
+    }
