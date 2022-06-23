@@ -1,0 +1,26 @@
+void helper(vector<int>&candidates,int target,int curr,int ind,vector<int>&temp,vector<vector<int>>&ans)
+    {
+        int n=candidates.size();
+        if(curr==target)ans.push_back(temp);
+        if(curr==target || curr>target || ind==n)return;
+        
+        for(int i=ind;i<n;i++)
+        {
+            //if(i>ind and candidates[i]==candidates[i-1])continue;
+            curr+=candidates[i];
+            temp.push_back(candidates[i]);
+            helper(candidates,target,curr,i+1,temp,ans);
+            curr-=candidates[i];
+            temp.pop_back();
+            while(i+1<n and candidates[i]==candidates[i+1])i++;
+        }
+        return;
+    }
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>>ans;
+        vector<int>temp;
+        sort(candidates.begin(),candidates.end());
+        helper(candidates,target,0,0,temp,ans);
+        return ans;
+    }
