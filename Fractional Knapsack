@@ -1,0 +1,24 @@
+ double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        priority_queue<pair<double,int>>pq;
+        for(int i=0;i<n;i++)pq.push({(double)arr[i].value/arr[i].weight,arr[i].weight});
+        int curr=0;
+        double ans=0;
+        while(!pq.empty() and curr<W)
+        {
+            int diff=W-curr;
+            if(pq.top().second<=diff)
+            {
+                ans+=(pq.top().first*pq.top().second);
+                curr+=pq.top().second;
+            }
+            else
+            {
+                ans+=(pq.top().first*diff);
+                curr=W;
+            }
+            pq.pop();
+        }
+        return ans;
+        
+    }
