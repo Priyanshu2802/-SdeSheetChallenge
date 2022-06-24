@@ -21,20 +21,25 @@ ListNode *getIntersectionNode(ListNode *head1, ListNode *head2) {
         //     head2=head2->next;
         // }
         // return NULL;
-        
-        //O(n) time complexity using map
-        map<ListNode*,int>mp;
-        ListNode* temp=head1;
-        while(temp)
+        // map<ListNode*,int>mp;
+        // ListNode* temp=head1;
+        // while(temp)
+        // {
+        //     mp[temp]++;
+        //     temp=temp->next;
+        // }
+        // temp=head2;
+        // while(temp)
+        // {
+        //     if(mp[temp]>0)return temp;
+        //     temp=temp->next;
+        // }
+        // return NULL;
+        ListNode* a=head1,*b=head2;
+        while(a!=b)
         {
-            mp[temp]++;
-            temp=temp->next;
+            a=a==NULL?head2:a->next;
+            b=b==NULL?head1:b->next;
         }
-        temp=head2;
-        while(temp)
-        {
-            if(mp[temp]>0)return temp;
-            temp=temp->next;
-        }
-        return NULL;
+        return a;
     }
