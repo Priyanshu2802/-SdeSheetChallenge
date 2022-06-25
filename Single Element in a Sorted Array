@@ -1,0 +1,18 @@
+ int singleNonDuplicate(vector<int>& nums) {
+        int start=0,end=nums.size()-2;
+        while(start<=end)
+        {
+            int mid=(start+end)>>1;
+            if(nums[mid]==nums[mid^1])start=mid+1;
+            else
+                end=mid-1;
+        }
+        return nums[start];
+    }
+//for right half 
+//1st instance -odd 
+//2nd instance -even 
+//as numbering start with even number so after a single element order will changes
+//for left half
+//1st instance -even
+//2nd instance- odd
