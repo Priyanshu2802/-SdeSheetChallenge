@@ -1,0 +1,51 @@
+//using extra space 
+
+// void helper(string &curr,string s,vector<string>&ans,vector<int>&freq)
+// {
+//     if(curr.size()>=s.size())
+//     {
+//         ans.push_back(curr);
+//         return;
+//     }
+//     for(int i=0;i<s.size();i++)
+//     {
+//         if(!freq[i])
+//         {
+//             curr.push_back(s[i]);
+//             freq[i]=1;
+//             helper(curr,s,ans,freq);
+//             freq[i]=0;
+//             curr.pop_back();
+//         }
+//     }
+// }
+// vector<string> findPermutations(string &s) {
+//     vector<int>freq(s.size(),0);
+//     vector<string>ans;
+//     string curr="";
+//     helper(curr,s,ans,freq);
+//     return ans;
+// }
+
+//with the help of swapping
+
+ void helper(vector<int>nums,vector<vector<int>>&ans,int index)
+    {
+        if(nums.size()<=index)
+        {
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=index;i<nums.size();i++)
+        {
+            swap(nums[index],nums[i]);
+            helper(nums,ans,index+1);
+            swap(nums[index],nums[i]);
+        }
+    }
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        helper(nums,ans,0);
+        return ans;
+    }
