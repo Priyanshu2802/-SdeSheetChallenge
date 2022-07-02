@@ -1,0 +1,38 @@
+int findPivot(vector<int>&nums)//return the min element's index
+    {
+        int n=nums.size();
+        int start=0,end=n-1;
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            if(nums[mid]<nums[(mid+1+n)%n] and nums[mid]<nums[(mid-1+n)%n])return mid;
+            else if(nums[mid]>nums[n-1])start=mid+1;
+            else
+                end=mid-1;
+                
+        }
+        return start;
+    }
+    int helper(vector<int>&nums,int start,int end,int target)
+    {
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            if(nums[mid]==target)return mid;
+            else if(target>nums[mid])start=mid+1;
+            else
+                end=mid-1;
+        }
+        return -1;
+    }
+public:
+    int search(vector<int>& nums, int target) {
+        int mid=findPivot(nums);
+        int n=nums.size();
+        //cout<<mid<<" value at mid is "<<nums[mid]<<endl;
+        int prev=(n+mid-1)%n;
+        int leftPart=helper(nums,0,prev,target);
+        int rightPart=helper(nums,mid,n-1,target);
+        if(leftPart!=-1)return leftPart;
+        return rightPart;
+    }
