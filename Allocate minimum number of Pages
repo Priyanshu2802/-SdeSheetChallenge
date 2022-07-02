@@ -1,0 +1,37 @@
+bool isPossible(int arr[],int n,int m ,int mid)
+    {
+        int student=1;
+        int curr=0;
+        for(int i=0;i<n;i++)
+        {
+            if(curr+arr[i]<=mid)curr+=arr[i];
+            else
+            {
+                student++;
+                if(student>m || arr[i]>mid)return false;
+                else
+                curr=arr[i];
+            }
+        }
+        return true;
+    }
+    public:
+    //Function to find minimum number of pages.
+    int findPages(int arr[], int n, int m) 
+    {
+        int ans=-1,sum=0;
+        for(int i=0;i<n;i++)sum+=arr[i];
+        int start=arr[n-1],end=sum;//the start is arr[n-1] as the maximum no. of pages in any configuration must be greater than or equal to arr[n-1];
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            if(isPossible(arr,n,m,mid))//checking for mid as a possible solution
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            start=mid+1;
+        }
+        return ans;
+    }
